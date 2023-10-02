@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="nav">
+    <div class="logo">
+      <h1>MyDashboard</h1>
+    </div>
+    <div class="profile">
+      <img src="img/bell.png" height="16px" alt="">
+      <div class="profile-picture">
+        <h3>Welcome, Jason H</h3>
+        <img src="img/user.png" height="35px" alt="">
+      </div>
+    </div>
+  </div>
+
+  <div id="layout-container">
+
+    <div id="sidebar">
+      <input type="text" placeholder="Search">
+
+      <div class="sidebar-menu">
+        <div class="sidebar-button">
+          <a href="#">
+            <img src="img/home.png" height="16px" alt="">
+            <span>Home</span>
+          </a>
+        </div>
+        <div class="sidebar-button">
+          <a href="#">
+            <img src="img/dashboard.png" height="16px" alt="">
+            <span>Dashboard</span>
+          </a>
+        </div>
+        <div class="sidebar-button">
+          <a href="#">
+            <img src="img/history.png" height="16px" alt="">
+            <span>History</span>
+          </a>
+        </div>
+        <div class="sidebar-button">
+          <a href="#">
+            <img src="img/settings.png" height="16px" alt="">
+            <span>Settings</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div id="main-content">
+
+        <!-- Add Product -->
+        <div class="add-product">
+          <fieldset>
+            <h1>Add New Product</h1>
+            <div class="upload-image">
+              <h3>Product Image</h3>
+              <!-- <input id="product-img" type="file" accept="image/jpeg, image/png, image/jpg"> -->
+              <input type="url" id="product-img" placeholder="Enter image URL">
+            </div>
+            <div class="product-info">
+              <h3>Product Information</h3>
+              <input id="product-name" type="text" placeholder="Product name">
+              <select name="" id="product-category">
+                <option value="">Choose Category</option>
+                <option value="Food">Food</option>
+                <option value="Drink">Drink</option>
+                <option value="Snack">Snack</option>
+              </select>
+            </div>
+            <div class="price">
+              <h3>Product Price</h3>
+              <input id="product-price" type="number" step="500" placeholder="Product price">
+              <input id="product-stock" type="number" placeholder="Stock">
+            </div>
+            <button id="add-product-btn" class="btn-primary" onclick="addData()">Add Product</button>
+          </fieldset>
+        </div>
+
+        <div class="product-list">
+          <fieldset>
+            <h1>Product List</h1>
+          <div id="filter-product">
+            <div class="search-container">
+              <input type="text" id="search-input" placeholder="Search product name ..." onkeyup="searchBar()">
+              <!-- <button id="search">Search</button> -->
+            </div>
+            <div class="bottom-filter">
+              <div class="filter-btn">
+                <select name="" id="filter-category" onchange="filterCategory()">
+                  <option value="">Filter Category</option>
+                  <option value="Food">Food</option>
+                  <option value="Drink">Drink</option>
+                  <option value="Snack">Snack</option>
+                </select>
+              </div>
+              <div class="price-filter">
+                <input id="range-price" type="range" min="0" max="50000" step="5000" value="50000" oninput="priceFilter()">
+                <span id="real-time-price">50000</span>
+              </div>
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>SKU</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Stock</th>
+                <th>Price</th>
+                <th>Action</th>
+                <th>Transaction</th>
+              </tr>
+            </thead>
+            <tbody id="product-tables">
+            </tbody>
+          </table>
+          </fieldset>
+        </div>
+
+        <div class="cart-checkout">
+            <!-- Cart -->
+            <fieldset class="cart-container">
+              <h1>Cart</h1>
+              <div class="cart-list">
+                <table>                  
+                  <tbody id="cart-tables">
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="4">Total:</td>
+                      <td id="cart-quantity">0</td>
+                      <td colspan="2" id="cart-total">0.00</td>
+                    </tr>
+                </tfoot>
+                </table>
+              </div>
+            </fieldset>
+            <!-- Checkout -->
+            <fieldset class="checkout-container">
+              <h1>Payment</h1>
+              <label for="customer-name">Customer Name:</label>
+              <input id="customer-name" type="text" placeholder="Enter name here">
+              <h3>Total Price : <span id="checkout-total">Rp 0,00</span></h3>
+              <label for="amount">Enter Amount:</label>
+              <input id="amount" type="number" step="500">
+              <button class="btn-primary" onclick="checkout()">Checkout</button>
+            </fieldset>
+        </div>
+
+        <div class="history">
+          <fieldset>
+            <h1>Transaction History</h1>
+            <table>
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Date</th>
+                  <th>Customer Name</th>
+                  <th>Total Transaction</th>
+                </tr>
+              </thead>
+              <tbody id="history-tables"></tbody>
+            </table>
+          </fieldset>
+        </div>
+
+        <div class="analytics">
+          <fieldset>
+            <h1>Data Summary</h1>
+            <div class="card-container">
+              <div class="card">
+                <h2>Total Revenue</h2>
+                <h1 id="revenue">0</h1>
+              </div>
+              <div class="card">
+                <h2>Total Customers</h2>
+                <h1 id="total-customer">0</h1>
+              </div>
+              <div class="card">
+                <h2>Etc</h2>
+                <h1 id=""></h1>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+    </div> 
+
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
